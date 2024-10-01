@@ -1,0 +1,12 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "tailwindConfig": "./tailwind.config.js",
+  "organizeImportsSkipDestructiveCodeActions": true,
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
+  ]
+}
