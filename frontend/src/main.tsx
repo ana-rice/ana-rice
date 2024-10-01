@@ -1,9 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import ImageUpload from './ImageUpload'; // Import the ImageUpload component
+import './index.css';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <h1 className="text-red-600">Hello World</h1>
-  </StrictMode>,
-)
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <ImageUpload /> {/* Display the ImageUpload component */}
+    </StrictMode>
+  );
+}
