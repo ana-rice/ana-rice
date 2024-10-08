@@ -4,9 +4,13 @@ version = "0.1.0"
 description = "Backend for ana rice project."
 authors = ["wuihee <wuihee@gmail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
+flask = "^3.0.3"
+flask-cors = "^5.0.0"
+gunicorn = "^23.0.0"
 
 
 [build-system]
