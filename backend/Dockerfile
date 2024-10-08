@@ -8,4 +8,4 @@ COPY . .
 
 RUN poetry install
 
-CMD ["poetry", "run", "python", "-m", "flask", "run"]
+CMD ["poetry", "run", "python", "-m", "flask", "run", "--host=0.0.0.0"]
