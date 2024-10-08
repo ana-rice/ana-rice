@@ -1,0 +1,36 @@
+services:
+  database:
+    image: postgres:17
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: default_database
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 15433:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - database
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - 8000:8000
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - 5173:5173
+
+volumes:
+  data:
