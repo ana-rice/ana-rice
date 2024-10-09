@@ -1,24 +1,24 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-
 import base64
-import utils
+
+from flask import Flask, request
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route("/api/python")
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.post('/api/saveImage')
-def saveImage():
 
+@app.post("/api/saveImage")
+def saveImage():
     # Example JSON containing a Base64-encoded image
     json_data = request.get_json()
 
     # Get the Base64 string from the JSON
-    base64_string = json_data['image']
+    base64_string = json_data["image"]
 
     # Decode the Base64 string
     image_data = base64.b64decode(base64_string)
