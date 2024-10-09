@@ -1,5 +1,11 @@
 # Ana Rice
 
+## Run Application
+
+```bash
+docker compose up --watch --build
+```
+
 ## Setup Backend
 
 - [Install `pipx`](https://pipx.pypa.io/latest/installation/).
