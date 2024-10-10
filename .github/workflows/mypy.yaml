@@ -1,11 +1,9 @@
-name: mypy
+name: Code Quality
 
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 jobs:
-  mypy:
+  code-quality:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,7 +15,10 @@ jobs:
           python-version: "3.11"
 
       - name: Install Dependencies
-        run: pip install mypy
+        run: pip install mypy ruff
 
       - name: Run mypy
         run: mypy ./backend --ignore-missing-imports
+
+      - name: Run Linter
+        uses: astral-sh/ruff-action@v1
