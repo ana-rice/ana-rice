@@ -1,4 +1,4 @@
-name: Code Quality
+name: Backend Code Quality
 
 on: [push, pull_request]
 
@@ -22,3 +22,5 @@ jobs:
 
       - name: Run Linter
         uses: astral-sh/ruff-action@v1
+        with:
+          args: "format --check"
