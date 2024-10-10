@@ -12,8 +12,8 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@app.post("/api/saveImage")
-def saveImage():
+@app.post("/api/upload")
+def upload():
     # Example JSON containing a Base64-encoded image
     json_data = request.get_json()
 
