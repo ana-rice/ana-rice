@@ -1,4 +1,4 @@
-name: Backend Type Checking
+name: mypy
 
 on:
   push:
