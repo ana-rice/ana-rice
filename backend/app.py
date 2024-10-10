@@ -26,3 +26,5 @@ def upload():
     # Write the image data to a file (e.g., a PNG file)
     with open("decoded_image.png", "wb") as f:
         f.write(image_data)
+
+    return {"data": "success"}
