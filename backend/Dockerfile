@@ -4,8 +4,11 @@ RUN pip install poetry==1.8.3
 
 WORKDIR /app
 
-COPY . .
+COPY pyproject.toml poetry.lock ./
 
-RUN poetry install
+# Install dependencies before copying code so that we don't install dependencies everytime.
+RUN poetry install --no-root
+
+COPY . .
 
 CMD ["poetry", "run", "python", "-m", "flask", "run", "--host=0.0.0.0", "--debug"]
