@@ -7,7 +7,7 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock ./
 
 # Install dependencies before copying code so that we don't install dependencies everytime.
-RUN poetry install --no-root
+RUN poetry install --no-root --without dev
 
 COPY . .
 
