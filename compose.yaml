@@ -23,6 +23,11 @@ services:
   backend:
     build:
       context: ./backend
+    develop:
+      watch:
+        - path: ./backend/app
+          action: sync
+          target: /app/app
 
   frontend:
     build:
