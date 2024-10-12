@@ -1,0 +1,24 @@
+name: Backend Code Quality
+
+on: [push, pull_request]
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: pip install mypy ruff
+
+      - name: Run mypy
+        run: mypy ./backend --ignore-missing-imports
+
+      - name: Run Linter
+        uses: astral-sh/ruff-action@v1

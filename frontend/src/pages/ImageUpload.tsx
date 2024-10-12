@@ -23,7 +23,7 @@ const ImageUpload: React.FC = () => {
   const handleImageUpload = () => {
     if (imageSrc) {
       setLoading(true); // Set loading state
-      fetch("/api/upload", {
+      fetch("/api/users/uploadImage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,14 +1,22 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import ImageUpload from './ImageUpload'; // Import the ImageUpload component
-import './index.css';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import ImageUpload from "./pages/ImageUpload";
 
-const rootElement = document.getElementById('root');
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ImageUpload />,
+  },
+]);
 
-if (rootElement) {
-  createRoot(rootElement).render(
+const root = document.getElementById("root");
+
+if (root) {
+  createRoot(root).render(
     <StrictMode>
-      <ImageUpload /> {/* Display the ImageUpload component */}
-    </StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
   );
 }
