@@ -1,8 +1,10 @@
+import Navbar from "@/components/layout/Navbar";
 import { Outlet } from "react-router-dom";
 
-const RootPage: React.FC = (): JSX.Element => {
+const RootPage = () => {
   return (
     <div>
+      <Navbar />
       <Outlet />
     </div>
   );

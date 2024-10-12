@@ -1,9 +1,5 @@
-const HomePage: React.FC = (): JSX.Element => {
-  return (
-    <div>
-      <h1>About</h1>
-    </div>
-  );
+const HomePage = () => {
+  return <div></div>;
 };
 
 export default HomePage;
