@@ -17,9 +17,11 @@ const Navbar = () => {
         </H1>
         <NavigationMenu>
           <NavigationMenuList>
-            <NavigationMenuItem className={navigationMenuTriggerStyle()}>
-              <Link to="/dashboard">Dashboard</Link>
-            </NavigationMenuItem>
+            <Link to="/dashboard">
+              <NavigationMenuItem className={navigationMenuTriggerStyle()}>
+                Dashboard
+              </NavigationMenuItem>
+            </Link>
             <NavigationMenuItem>
               <Button>Sign In</Button>
             </NavigationMenuItem>

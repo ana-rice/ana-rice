@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import { H2 } from "@/components/ui/typography";
 
 const DashboardPage = () => {
@@ -6,6 +7,7 @@ const DashboardPage = () => {
     const file = selectedFiles ? selectedFiles[0] : null;
     if (file !== null && file.type.startsWith("image")) {
       const reader = new FileReader();
+      // TODO: Progress bar & preview image?
       reader.onload = async (event: ProgressEvent<FileReader>) => {
         if (event.target !== null && event.target.result !== null) {
           try {
@@ -17,8 +19,10 @@ const DashboardPage = () => {
               body: JSON.stringify({ image: event.target.result }),
             });
             const data = await response.json();
+            // TODO: Alert user that they successfully uploaded file.
             console.log(data);
           } catch (error) {
+            // TODO: Error popup?
             console.log(error);
           }
         }
@@ -30,7 +34,12 @@ const DashboardPage = () => {
   return (
     <div className="px-20 py-8">
       <H2 className="mb-3">Dashboard</H2>
-      <input type="file" accept="image/*" onChange={uploadImage} />
+      <Input
+        className="cursor-pointer"
+        type="file"
+        accept="image/*"
+        onChange={uploadImage}
+      />
     </div>
   );
 };
