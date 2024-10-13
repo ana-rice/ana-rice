@@ -11,4 +11,4 @@ RUN poetry install --no-root --without dev
 
 COPY . .
 
-CMD ["poetry", "run", "python", "-m", "flask", "run", "--host=0.0.0.0", "--debug"]
+CMD ["poetry", "run", "python", "-u", "-m", "flask", "run", "--host=0.0.0.0", "--debug"]

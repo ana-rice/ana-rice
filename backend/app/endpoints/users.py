@@ -7,11 +7,14 @@ blueprint = Blueprint("users", __name__, url_prefix="/api/users")
 
 @blueprint.route("/uploadImage", methods=["POST"])
 def upload_image():
-    json_data = request.get_json()
-    base64_string = json_data["image"]
-    image_data = base64.b64decode(base64_string)
+    data = request.get_json()
+    b64_image = data["image"]
 
-    with open("decoded_image.png", "wb") as f:
-        f.write(image_data)
+    # Get rid of the data URI prefix.
+    if "," in b64_image:
+        b64_image = b64_image.split(",")[1]
 
-    return {"data": "success"}
+    with open("./images/rice.png", "wb") as f:
+        f.write(base64.b64decode(b64_image))
+
+    return {"message": "Image uploaded successfully!"}
