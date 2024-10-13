@@ -41,6 +41,8 @@ services:
           target: /app/src
           ignore:
             - node_modules
+        - path: ./frontend/package.json
+          action: rebuild
 
 volumes:
   data:
