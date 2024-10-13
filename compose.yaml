@@ -28,6 +28,8 @@ services:
         - path: ./backend/app
           action: sync
           target: /app/app
+    volumes:
+      - ./backend/images:/app/images
 
   frontend:
     build:
