@@ -5,6 +5,8 @@ from flask import Blueprint, request
 blueprint = Blueprint("users", __name__, url_prefix="/api/users")
 
 
+# TODO: Change this to use Flask to upload files.
+# TODO: Change frontend to submit file using a form.
 @blueprint.route("/uploadImage", methods=["POST"])
 def upload_image():
     data = request.get_json()
@@ -14,7 +16,8 @@ def upload_image():
     if "," in b64_image:
         b64_image = b64_image.split(",")[1]
 
-    with open("./images/rice.png", "wb") as f:
+    path = "./images/rice.png"
+    with open(path, "wb") as f:
         f.write(base64.b64decode(b64_image))
 
-    return {"message": "Image uploaded successfully!"}
+    return {"message": "Image uploaded successfully"}
