@@ -18,7 +18,7 @@ const DashboardPage = () => {
     const selectedFiles = event.target.files;
     const file = selectedFiles ? selectedFiles[0] : null;
 
-    if (file !== null && file.type.startsWith("image")) {
+    if (file !== null) {
       setFile(file);
 
       const reader = new FileReader();
@@ -48,6 +48,10 @@ const DashboardPage = () => {
           body: formData,
         });
         const data = await response.json();
+        toast({
+          title: "Success!",
+          description: "File uploaded successfully.",
+        });
         console.log(data);
       } catch (error) {
         // Display "toast" at the bottom of the page during error.
@@ -60,8 +64,6 @@ const DashboardPage = () => {
         console.log(error);
       }
 
-      setFile(null);
-      setImageString(null);
       setLoading(false);
     }
   };
@@ -72,8 +74,13 @@ const DashboardPage = () => {
       <H2 className="mb-3">Dashboard</H2>
 
       {/* File Upload */}
-      <form className="flex" onSubmit={handleSubmit}>
-        <Input type="file" name="file" onChange={handleSelectFile} />
+      <form className="my-3 flex" onSubmit={handleSubmit}>
+        <Input
+          className="mr-2"
+          type="file"
+          name="file"
+          onInput={handleSelectFile}
+        />
         {loading ? <Spinner /> : <Button type="submit">Submit</Button>}
       </form>
 
