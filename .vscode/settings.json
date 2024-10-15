@@ -8,4 +8,7 @@
     },
     "python.analysis.typeCheckingMode": "strict",
     "ruff.lint.args": ["--ignore=F401"],
+    "[typescriptreact]": {
+        "editor.tabSize": 2
+    }
 }

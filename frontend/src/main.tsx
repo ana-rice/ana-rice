@@ -2,12 +2,24 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import ImageUpload from "./pages/ImageUpload";
+import DashboardPage from "./pages/DashboardPage";
+import HomePage from "./pages/HomePage";
+import RootPage from "./pages/RootPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ImageUpload />,
+    element: <RootPage />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardPage />,
+      },
+    ],
   },
 ]);
 
