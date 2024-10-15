@@ -7,38 +7,50 @@ import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 const DashboardPage = () => {
-  const [image, setImage] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [imageString, setImageString] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
+  // Callback function called when file is selected.
+  // Updates the image state to be the selected file so we can preview it.
   const handleSelectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = event.target.files;
     const file = selectedFiles ? selectedFiles[0] : null;
+
     if (file !== null && file.type.startsWith("image")) {
+      setFile(file);
+
       const reader = new FileReader();
       reader.onload = (event: ProgressEvent<FileReader>) => {
         if (event.target !== null && event.target.result !== null) {
-          setImage(event.target.result as string);
+          setImageString(event.target.result as string);
         }
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleUpload = async () => {
-    if (image !== null) {
+  // Callback function called when form is submitted.
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (file !== null) {
       setLoading(true);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("fileName", file.name);
+
       try {
         const response = await fetch("/api/users/uploadImage", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ image: image }),
+          body: formData,
         });
         const data = await response.json();
         console.log(data);
       } catch (error) {
+        // Display "toast" at the bottom of the page during error.
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
@@ -47,7 +59,9 @@ const DashboardPage = () => {
         // ? Do we log this?
         console.log(error);
       }
-      setImage(null);
+
+      setFile(null);
+      setImageString(null);
       setLoading(false);
     }
   };
@@ -58,22 +72,13 @@ const DashboardPage = () => {
       <H2 className="mb-3">Dashboard</H2>
 
       {/* File Upload */}
-      <div className="flex">
-        <Input
-          className="cursor-pointer"
-          type="file"
-          accept="image/*"
-          onChange={handleSelectFile}
-        />
-        {loading ? (
-          <Spinner className="ml-1 mt-2" />
-        ) : (
-          <Button onClick={handleUpload}>Upload</Button>
-        )}
-      </div>
+      <form className="flex" onSubmit={handleSubmit}>
+        <Input type="file" name="file" onChange={handleSelectFile} />
+        {loading ? <Spinner /> : <Button type="submit">Submit</Button>}
+      </form>
 
       {/* Preview Image */}
-      {image && <img src={image} />}
+      {imageString && <img src={imageString} />}
 
       {/* Display Toast Message */}
       <Toaster />
