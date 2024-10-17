@@ -28,8 +28,11 @@ services:
         - path: ./backend/app
           action: sync
           target: /app/app
+        - path: ./backend/pyproject.toml
+          action: rebuild
     volumes:
       - ./backend/images:/app/images
+      - ./backend/migrations:/app/migrations
 
   frontend:
     build:
