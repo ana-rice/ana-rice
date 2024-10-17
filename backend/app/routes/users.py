@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from werkzeug.utils import secure_filename
 
-from ..models import RiceImage, db
+from ..extensions import db
+from ..models import RiceImage
 
 blueprint = Blueprint("users", __name__, url_prefix="/api/users")
 

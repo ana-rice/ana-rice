@@ -1,19 +1,20 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
-db = SQLAlchemy()
+from .config import Config
+from .extensions import db
+from .routes.users import blueprint as users_blueprint
 
 
 def create_app():
     # Importing routes inside function to avoid circular imports.
-    from .routes.users import blueprint as users_blueprint
 
     app = Flask("app")
-    app.config["SQLALCHEMY_DATABASE_URI"] = (
-        "postgresql://username:password@database:5432/default_database"
-    )
+    app.config.from_object(Config)
 
     db.init_app(app)
+    _migrate = Migrate(app, db)
 
     app.register_blueprint(users_blueprint)
+
     return app
