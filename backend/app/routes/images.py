@@ -38,3 +38,17 @@ def upload_image():
         return {"message": "File successfully uploaded!"}
 
     return {"message": "Something went wrong."}, 500
+
+
+@blueprint.route("/getImageIds", methods=["GET"])
+def get_image_ids():
+    try:
+        images = db.session.execute(db.select(RiceImage))
+        return {"images": "How the fuck do I convert a row to a bloody dictionary???"}
+    except Exception as e:
+        return {"message": f"error: {e}"}
+
+
+@blueprint.route("/getImage/:pid". methods=["GET"])
+def get_image():
+    pass

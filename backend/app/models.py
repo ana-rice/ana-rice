@@ -1,6 +1,9 @@
+from dataclasses import dataclass
+
 from .extensions import db
 
 
+@dataclass
 class RiceImage(db.Model):
     __tablename__ = "rice_images"
 
