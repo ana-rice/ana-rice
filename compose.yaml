@@ -23,6 +23,8 @@ services:
   backend:
     build:
       context: ./backend
+    ports:
+      - 5001:5000
     develop:
       watch:
         - path: ./backend/app
