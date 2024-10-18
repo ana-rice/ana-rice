@@ -23,13 +23,18 @@ services:
   backend:
     build:
       context: ./backend
+    ports:
+      - 5001:5000
     develop:
       watch:
         - path: ./backend/app
           action: sync
           target: /app/app
+        - path: ./backend/pyproject.toml
+          action: rebuild
     volumes:
       - ./backend/images:/app/images
+      - ./backend/migrations:/app/migrations
 
   frontend:
     build:
